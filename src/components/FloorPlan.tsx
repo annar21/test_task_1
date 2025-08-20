@@ -20,20 +20,22 @@ function TableCard({ table }: { table: Table }) {
   const isSelected = selectedId === table.id;
 
   return (
-    <button
+    <div
       onClick={() => dispatch(selectTable(isSelected ? null : table.id))}
       className={cn(
-        "group relative w-full rounded-xl border border-neutral-800/60 p-4 text-left transition",
+        "group relative min-w-full rounded-xl border border-neutral-800/60 p-4 text-left transition max-h-fit cursor-pointer",
         "hover:border-neutral-700 hover:bg-neutral-900/30",
         isSelected && "ring-2 ring-emerald-500/60"
       )}
     >
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between pr-4">
         <div>
           <div className="font-semibold">{table.name}</div>
           <div className="text-xs text-neutral-400">Capacity: {table.capacity}</div>
         </div>
-        <Badge className={statusToColor[table.status]}>{table.status}</Badge>
+        <div className="">
+          <Badge className={statusToColor[table.status]}>{table.status}</Badge>
+        </div>
       </div>
 
       {isSelected && (
@@ -79,7 +81,7 @@ function TableCard({ table }: { table: Table }) {
           />
         </div>
       )}
-    </button>
+    </div>
   );
 }
 
@@ -87,7 +89,7 @@ function ActionButton({ label, onClick, icon }: { label: string; onClick: (e: Re
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center gap-2 rounded-lg border border-neutral-800/60 px-3 py-1.5 text-xs hover:border-neutral-700 hover:bg-neutral-900/40"
+      className="cursor-pointer inline-flex items-center gap-2 rounded-lg border border-neutral-800/60 px-3 py-1.5 text-xs hover:border-neutral-700 hover:bg-neutral-900/40"
     >
       {icon}
       {label}
@@ -101,7 +103,7 @@ export function FloorPlan() {
   return (
     <section id="floor" className="space-y-3">
       <h2 className="text-lg font-semibold">Floor Plan</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {tables.map(t => (
           <TableCard key={t.id} table={t} />
         ))}

@@ -16,8 +16,8 @@ export default function HomePage() {
             <FloorPlan />
           </div>
           <div className="xl:col-span-5 space-y-6">
-            <ReservationsPanel />
             <WalkInPanel />
+            <ReservationsPanel />
           </div>
         </div>
       </LayoutShell>
